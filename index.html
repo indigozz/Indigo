@@ -18,7 +18,6 @@
       background: var(--blanco);
     }
 
-    /* HEADER */
     header {
       position: sticky;
       top: 0;
@@ -40,11 +39,35 @@
       cursor: pointer;
     }
 
-    main {
-      margin-top: 10px;
+    .search-btn {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      font-size: 20px;
+      cursor: pointer;
     }
 
-    /* SIDEBAR */
+    /* BUSCADOR */
+    #searchBar {
+      display: none;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    /* RESULTADO */
+    #resultado {
+      display: none;
+      text-align: center;
+      font-size: 40px;
+      color: var(--rojo);
+      margin-top: 50px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
     .sidebar {
       position: fixed;
       left: -260px;
@@ -56,7 +79,6 @@
       padding-top: 60px;
       transition: left 0.3s ease;
       z-index: 2000;
-      box-shadow: 5px 0 15px rgba(0,0,0,0.6);
     }
 
     .sidebar a {
@@ -66,11 +88,6 @@
       cursor: pointer;
     }
 
-    .sidebar a:hover {
-      background: #111;
-    }
-
-    /* GRID */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -78,7 +95,6 @@
       padding: 20px;
     }
 
-    /* CARD */
     .card {
       background: var(--negro);
       height: 230px;
@@ -87,11 +103,6 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      transition: transform 0.2s;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
     }
 
     .coming-soon {
@@ -109,18 +120,8 @@
       border: none;
       padding: 10px;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    button:hover {
-      background: #800000;
-    }
-
-    button:active {
-      transform: scale(0.95);
-    }
-
-    /* POPUP */
     #popup {
       position: fixed;
       bottom: 20px;
@@ -131,9 +132,7 @@
       padding: 15px 30px;
       border: 2px solid red;
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      z-index: 3000;
+      transition: 0.3s;
     }
 
     #popup.show {
@@ -143,7 +142,6 @@
 </head>
 <body>
 
-<!-- MENU -->
 <div class="sidebar" id="menu">
   <a onclick="noDisponible()">Compras</a>
   <a onclick="noDisponible()">Ayuda</a>
@@ -153,9 +151,14 @@
 <header>
   <span class="menu-btn" id="menuBtn">☰</span>
   INDIGO
+  <span class="search-btn" onclick="toggleSearch()">🔍</span>
 </header>
 
-<main>
+<input type="text" id="searchBar" placeholder="Buscar..." oninput="buscar()">
+
+<div id="resultado">INDIGO</div>
+
+<main id="contenido">
   <section class="grid" id="productos"></section>
 </main>
 
@@ -166,27 +169,21 @@
   const menuBtn = document.getElementById("menuBtn");
   const popup = document.getElementById("popup");
 
-  // MENU TOGGLE
   menuBtn.addEventListener("click", function(e) {
     e.stopPropagation();
     menu.style.left = (menu.style.left === "0px") ? "-260px" : "0px";
   });
 
-  // CERRAR MENU AL HACER CLICK FUERA
   document.addEventListener("click", function(e) {
     if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
       menu.style.left = "-260px";
     }
   });
 
-  // POPUP
   function mostrarPopup(texto) {
     popup.innerText = texto;
     popup.classList.add("show");
-
-    setTimeout(() => {
-      popup.classList.remove("show");
-    }, 2000);
+    setTimeout(() => popup.classList.remove("show"), 2000);
   }
 
   function mostrarMensaje() {
@@ -197,19 +194,36 @@
     mostrarPopup("NO DISPONIBLE POR EL MOMENTO");
   }
 
-  // GENERAR MUCHOS PRODUCTOS AUTOMÁTICO
+  // PRODUCTOS
   const contenedor = document.getElementById("productos");
-
   for (let i = 0; i < 20; i++) {
     const card = document.createElement("div");
     card.className = "card";
-
     card.innerHTML = `
       <div class="coming-soon">PRÓXIMAMENTE</div>
       <button onclick="mostrarMensaje()">Comprar</button>
     `;
-
     contenedor.appendChild(card);
+  }
+
+  // BUSCADOR
+  function toggleSearch() {
+    const bar = document.getElementById("searchBar");
+    bar.style.display = (bar.style.display === "block") ? "none" : "block";
+  }
+
+  function buscar() {
+    const texto = document.getElementById("searchBar").value;
+    const resultado = document.getElementById("resultado");
+    const contenido = document.getElementById("contenido");
+
+    if (texto.length > 0) {
+      resultado.style.display = "block";
+      contenido.style.display = "none";
+    } else {
+      resultado.style.display = "none";
+      contenido.style.display = "block";
+    }
   }
 </script>
 
