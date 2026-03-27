@@ -8,13 +8,17 @@
 <style>
 :root{
   --rojo:#ff2b2b;
-  --gris:#f2f2f2;
+  --blanco:#f5f5f5;
 }
 
+/* BASE */
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:white;
+  background:linear-gradient(135deg,#ffffff,#eeeeee);
+  display:flex;
+  flex-direction:column;
+  height:100vh;
 }
 
 /* HEADER */
@@ -23,189 +27,52 @@ header{
   top:0;
   background:var(--rojo);
   color:white;
-  padding:15px;
   text-align:center;
+  padding:15px;
+  font-size:22px;
   font-weight:bold;
-  z-index:1000;
+  letter-spacing:3px;
 }
 
-.menu-btn,.cart-btn{
-  position:absolute;
-  top:15px;
-  cursor:pointer;
-}
-
-.menu-btn{left:15px;}
-.cart-btn{right:15px;}
-
-.cart-count{
-  position:absolute;
-  top:-5px;
-  right:-10px;
-  background:black;
-  color:white;
-  border-radius:50%;
-  font-size:12px;
-  padding:2px 6px;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-  padding:15px;
-}
-
-.card{
-  background:var(--gris);
-  height:200px;
-  border-radius:12px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  padding:10px;
-}
-
-.coming{
-  text-align:center;
-  margin-top:60px;
-  font-weight:bold;
-}
-
-button{
-  background:var(--rojo);
-  color:white;
-  border:none;
-  padding:10px;
-  border-radius:8px;
-}
-
-/* CARRITO PANTALLA */
-#pantallaCarrito{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:white;
-  z-index:5000;
-  display:none;
-  flex-direction:column;
-}
-
-.carrito-header{
-  background:var(--rojo);
-  color:white;
-  padding:15px;
-  text-align:center;
-  position:relative;
-}
-
-.volver{
-  position:absolute;
-  left:15px;
-  top:15px;
-  cursor:pointer;
-}
-
-#listaCarrito{
-  padding:15px;
-}
-
-/* INTRO */
-#intro{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  color:white;
+/* CONTENIDO */
+main{
+  flex:1;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:28px;
-  z-index:9999;
-  animation:fade 2s forwards 2s;
+  text-align:center;
 }
 
-@keyframes fade{
-  to{opacity:0;visibility:hidden;}
+/* TEXTO */
+.proximamente{
+  font-size:clamp(30px, 8vw, 70px);
+  font-weight:bold;
+  color:var(--rojo);
+  letter-spacing:4px;
 }
 
+/* DETALLE MODERNO */
+.proximamente::after{
+  content:"";
+  display:block;
+  width:60%;
+  height:3px;
+  background:var(--rojo);
+  margin:15px auto 0;
+  opacity:0.7;
+}
 </style>
 </head>
 
 <body>
 
-<div id="intro">BIENVENIDOS A INDIGO</div>
-
 <header>
-  <span class="menu-btn">☰</span>
   INDIGO
-  <span class="cart-btn" onclick="abrirCarrito()">🛒
-    <span class="cart-count" id="count">0</span>
-  </span>
 </header>
 
-<main id="tienda">
-  <section class="grid" id="productos"></section>
+<main>
+  <div class="proximamente">PRÓXIMAMENTE</div>
 </main>
-
-<!-- CARRITO -->
-<div id="pantallaCarrito">
-  <div class="carrito-header">
-    <span class="volver" onclick="cerrarCarrito()">←</span>
-    Carrito
-  </div>
-  <div id="listaCarrito"></div>
-</div>
-
-<script>
-let carrito=[];
-
-const lista=document.getElementById("listaCarrito");
-const count=document.getElementById("count");
-
-/* PRODUCTOS */
-const cont=document.getElementById("productos");
-
-for(let i=0;i<10;i++){
-  const card=document.createElement("div");
-  card.className="card";
-  card.innerHTML=`
-    <div class="coming">PRÓXIMAMENTE</div>
-    <button onclick="agregar()">AGREGAR AL CARRO</button>
-  `;
-  cont.appendChild(card);
-}
-
-/* AGREGAR */
-function agregar(){
-  carrito.push("Producto INDIGO");
-  actualizar();
-}
-
-/* ACTUALIZAR */
-function actualizar(){
-  lista.innerHTML="";
-  carrito.forEach(p=>{
-    const div=document.createElement("div");
-    div.innerText=p;
-    lista.appendChild(div);
-  });
-  count.innerText=carrito.length;
-}
-
-/* ABRIR */
-function abrirCarrito(){
-  document.getElementById("pantallaCarrito").style.display="flex";
-}
-
-/* CERRAR */
-function cerrarCarrito(){
-  document.getElementById("pantallaCarrito").style.display="none";
-}
-</script>
 
 </body>
 </html>
