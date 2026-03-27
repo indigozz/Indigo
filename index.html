@@ -1,236 +1,262 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INDIGO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDIGO</title>
 
-  <style>
-    :root {
-      --rojo: rgba(179, 0, 0, 0.8);
-      --blanco: #f5f5f5;
-      --negro: #0a0a0a;
-    }
+<style>
+:root{
+  --rojo:#ff2b2b;
+  --fondo:#ffffff;
+  --negro:#111;
+}
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(to bottom, #f5f5f5, #eaeaea);
-    }
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--fondo);
+}
 
-    /* HEADER GLASS */
-    header {
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(10px);
-      background: rgba(179, 0, 0, 0.6);
-      color: white;
-      text-align: center;
-      padding: 15px;
-      font-size: 22px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      z-index: 1000;
-    }
+/* ANIMACIÓN INICIO */
+#intro{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  z-index:9999;
+  animation:fadeOut 2s forwards 2s;
+}
 
-    .menu-btn, .search-btn {
-      position: absolute;
-      top: 15px;
-      font-size: 20px;
-      cursor: pointer;
-    }
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden;}
+}
 
-    .menu-btn { left: 15px; }
-    .search-btn { right: 15px; }
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  background:var(--rojo);
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-weight:bold;
+  z-index:1000;
+}
 
-    /* BUSCADOR iOS */
-    #searchBar {
-      display: none;
-      width: 90%;
-      margin: 10px auto;
-      padding: 12px;
-      border-radius: 20px;
-      border: none;
-      outline: none;
-      backdrop-filter: blur(10px);
-      background: rgba(255,255,255,0.6);
-    }
+.menu-btn,.search-btn,.cart-btn{
+  position:absolute;
+  top:15px;
+  cursor:pointer;
+}
 
-    #resultado {
-      display: none;
-      text-align: center;
-      font-size: 40px;
-      color: rgba(179,0,0,0.8);
-      margin-top: 50px;
-      font-weight: bold;
-      letter-spacing: 3px;
-    }
+.menu-btn{left:15px;}
+.search-btn{right:50px;}
+.cart-btn{right:15px;}
 
-    /* SIDEBAR MODERNA */
-    .sidebar {
-      position: fixed;
-      left: -260px;
-      top: 0;
-      width: 260px;
-      height: 100%;
-      backdrop-filter: blur(15px);
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding-top: 60px;
-      transition: 0.3s;
-    }
+.cart-count{
+  position:absolute;
+  top:-5px;
+  right:-10px;
+  background:black;
+  color:white;
+  border-radius:50%;
+  font-size:12px;
+  padding:2px 6px;
+}
 
-    .sidebar a {
-      display: block;
-      padding: 15px;
-      border-bottom: 1px solid rgba(255,0,0,0.4);
-    }
+/* MENU */
+.sidebar{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:260px;
+  height:100%;
+  background:black;
+  color:white;
+  z-index:2000;
+  padding-top:60px;
+  transition:0.3s;
+}
 
-    /* GRID */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
+.sidebar a{
+  display:block;
+  padding:15px;
+  border-bottom:1px solid red;
+}
 
-    /* CARD GLASS */
-    .card {
-      height: 230px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,0,0,0.3);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      transition: 0.3s;
-    }
+.close-btn{
+  position:absolute;
+  top:10px;
+  right:15px;
+  cursor:pointer;
+}
 
-    .card:hover {
-      transform: scale(1.05);
-    }
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  padding:15px;
+}
 
-    .coming-soon {
-      text-align: center;
-      margin-bottom: auto;
-      margin-top: 80px;
-      color: white;
-      font-weight: bold;
-    }
+/* CARD */
+.card{
+  background:#f2f2f2;
+  height:200px;
+  border-radius:10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:10px;
+}
 
-    button {
-      border: none;
-      border-radius: 15px;
-      margin: 10px;
-      padding: 10px;
-      background: rgba(179,0,0,0.8);
-      color: white;
-    }
+.coming{
+  text-align:center;
+  margin-top:60px;
+  font-weight:bold;
+}
 
-    /* POPUP */
-    #popup {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      backdrop-filter: blur(10px);
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 15px 30px;
-      border-radius: 20px;
-      opacity: 0;
-      transition: 0.3s;
-    }
+button{
+  background:var(--rojo);
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+}
 
-    #popup.show {
-      opacity: 1;
-    }
-  </style>
+/* CARRITO PANEL */
+#cartPanel{
+  position:fixed;
+  right:-300px;
+  top:0;
+  width:300px;
+  height:100%;
+  background:white;
+  z-index:3000;
+  transition:0.3s;
+  padding:10px;
+}
+
+#cartPanel h3{
+  margin:0;
+}
+
+#cartItems{
+  margin-top:10px;
+}
+
+/* POPUP */
+#popup{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:black;
+  color:white;
+  padding:10px 20px;
+  opacity:0;
+  transition:0.3s;
+}
+
+#popup.show{opacity:1;}
+
+</style>
 </head>
+
 <body>
 
+<div id="intro">BIENVENIDOS A INDIGO</div>
+
 <div class="sidebar" id="menu">
+  <span class="close-btn" onclick="toggleMenu()">✖</span>
   <a onclick="noDisponible()">Compras</a>
   <a onclick="noDisponible()">Ayuda</a>
   <a onclick="noDisponible()">Contacto</a>
 </div>
 
+<div id="cartPanel">
+  <h3>Carrito</h3>
+  <div id="cartItems"></div>
+</div>
+
 <header>
   <span class="menu-btn" onclick="toggleMenu()">☰</span>
   INDIGO
-  <span class="search-btn" onclick="toggleSearch()">🔍</span>
+  <span class="search-btn">⌕</span>
+  <span class="cart-btn" onclick="toggleCart()">🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </span>
 </header>
 
-<input type="text" id="searchBar" placeholder="Buscar..." oninput="buscar()">
-
-<div id="resultado">INDIGO</div>
-
-<main id="contenido">
+<main>
   <section class="grid" id="productos"></section>
 </main>
 
-<div id="popup">PRÓXIMAMENTE</div>
+<div id="popup"></div>
 
 <script>
-  const menu = document.getElementById("menu");
-  const popup = document.getElementById("popup");
+const menu=document.getElementById("menu");
+const cartPanel=document.getElementById("cartPanel");
+const popup=document.getElementById("popup");
+const cartItems=document.getElementById("cartItems");
+const cartCount=document.getElementById("cartCount");
 
-  function toggleMenu() {
-    menu.style.left = (menu.style.left === "0px") ? "-260px" : "0px";
-  }
+let carrito=[];
 
-  document.addEventListener("click", function(e) {
-    if (!menu.contains(e.target) && !e.target.classList.contains("menu-btn")) {
-      menu.style.left = "-260px";
-    }
+/* MENU */
+function toggleMenu(){
+  menu.style.left = (menu.style.left==="0px") ? "-260px" : "0px";
+}
+
+/* CARRITO */
+function toggleCart(){
+  cartPanel.style.right = (cartPanel.style.right==="0px") ? "-300px" : "0px";
+}
+
+function agregar(){
+  carrito.push("Producto");
+  actualizarCarrito();
+  mostrarPopup("AGREGADO AL CARRO");
+}
+
+function actualizarCarrito(){
+  cartItems.innerHTML="";
+  carrito.forEach(p=>{
+    const div=document.createElement("div");
+    div.innerText=p;
+    cartItems.appendChild(div);
   });
+  cartCount.innerText=carrito.length;
+}
 
-  function mostrarPopup(texto) {
-    popup.innerText = texto;
-    popup.classList.add("show");
-    setTimeout(() => popup.classList.remove("show"), 2000);
-  }
+/* POPUP */
+function mostrarPopup(texto){
+  popup.innerText=texto;
+  popup.classList.add("show");
+  setTimeout(()=>popup.classList.remove("show"),1500);
+}
 
-  function mostrarMensaje() {
-    mostrarPopup("PRÓXIMAMENTE");
-  }
+function noDisponible(){
+  mostrarPopup("NO DISPONIBLE");
+}
 
-  function noDisponible() {
-    mostrarPopup("NO DISPONIBLE POR EL MOMENTO");
-  }
-
-  // PRODUCTOS
-  const contenedor = document.getElementById("productos");
-  for (let i = 0; i < 20; i++) {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <div class="coming-soon">PRÓXIMAMENTE</div>
-      <button onclick="mostrarMensaje()">Comprar</button>
-    `;
-    contenedor.appendChild(card);
-  }
-
-  // BUSCADOR
-  function toggleSearch() {
-    const bar = document.getElementById("searchBar");
-    bar.style.display = (bar.style.display === "block") ? "none" : "block";
-  }
-
-  function buscar() {
-    const texto = document.getElementById("searchBar").value;
-    const resultado = document.getElementById("resultado");
-    const contenido = document.getElementById("contenido");
-
-    if (texto.length > 0) {
-      resultado.style.display = "block";
-      contenido.style.display = "none";
-    } else {
-      resultado.style.display = "none";
-      contenido.style.display = "block";
-    }
-  }
+/* PRODUCTOS */
+const cont=document.getElementById("productos");
+for(let i=0;i<12;i++){
+  const card=document.createElement("div");
+  card.className="card";
+  card.innerHTML=`
+    <div class="coming">PRÓXIMAMENTE</div>
+    <button onclick="agregar()">AGREGAR AL CARRO</button>
+  `;
+  cont.appendChild(card);
+}
 </script>
 
 </body>
