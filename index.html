@@ -7,87 +7,86 @@
 
   <style>
     :root {
-      --rojo: #b30000;
+      --rojo: rgba(179, 0, 0, 0.8);
       --blanco: #f5f5f5;
       --negro: #0a0a0a;
     }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--blanco);
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(to bottom, #f5f5f5, #eaeaea);
     }
 
+    /* HEADER GLASS */
     header {
       position: sticky;
       top: 0;
-      background: var(--rojo);
+      backdrop-filter: blur(10px);
+      background: rgba(179, 0, 0, 0.6);
       color: white;
       text-align: center;
       padding: 15px;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
       letter-spacing: 3px;
       z-index: 1000;
     }
 
-    .menu-btn {
+    .menu-btn, .search-btn {
       position: absolute;
-      left: 15px;
-      top: 15px;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    .search-btn {
-      position: absolute;
-      right: 15px;
       top: 15px;
       font-size: 20px;
       cursor: pointer;
     }
 
-    /* BUSCADOR */
+    .menu-btn { left: 15px; }
+    .search-btn { right: 15px; }
+
+    /* BUSCADOR iOS */
     #searchBar {
       display: none;
-      width: 100%;
-      padding: 10px;
+      width: 90%;
+      margin: 10px auto;
+      padding: 12px;
+      border-radius: 20px;
       border: none;
       outline: none;
-      font-size: 16px;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.6);
     }
 
-    /* RESULTADO */
     #resultado {
       display: none;
       text-align: center;
       font-size: 40px;
-      color: var(--rojo);
+      color: rgba(179,0,0,0.8);
       margin-top: 50px;
       font-weight: bold;
       letter-spacing: 3px;
     }
 
+    /* SIDEBAR MODERNA */
     .sidebar {
       position: fixed;
       left: -260px;
       top: 0;
       width: 260px;
       height: 100%;
-      background: black;
+      backdrop-filter: blur(15px);
+      background: rgba(0,0,0,0.7);
       color: white;
       padding-top: 60px;
-      transition: left 0.3s ease;
-      z-index: 2000;
+      transition: 0.3s;
     }
 
     .sidebar a {
       display: block;
       padding: 15px;
-      border-bottom: 1px solid red;
-      cursor: pointer;
+      border-bottom: 1px solid rgba(255,0,0,0.4);
     }
 
+    /* GRID */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -95,42 +94,51 @@
       padding: 20px;
     }
 
+    /* CARD GLASS */
     .card {
-      background: var(--negro);
       height: 230px;
-      position: relative;
-      border: 2px dashed red;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,0,0,0.3);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
     }
 
     .coming-soon {
+      text-align: center;
+      margin-bottom: auto;
+      margin-top: 80px;
       color: white;
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       font-weight: bold;
     }
 
     button {
-      background: var(--rojo);
-      color: white;
       border: none;
+      border-radius: 15px;
+      margin: 10px;
       padding: 10px;
-      cursor: pointer;
+      background: rgba(179,0,0,0.8);
+      color: white;
     }
 
+    /* POPUP */
     #popup {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: black;
+      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.7);
       color: white;
       padding: 15px 30px;
-      border: 2px solid red;
+      border-radius: 20px;
       opacity: 0;
       transition: 0.3s;
     }
@@ -149,7 +157,7 @@
 </div>
 
 <header>
-  <span class="menu-btn" id="menuBtn">☰</span>
+  <span class="menu-btn" onclick="toggleMenu()">☰</span>
   INDIGO
   <span class="search-btn" onclick="toggleSearch()">🔍</span>
 </header>
@@ -166,16 +174,14 @@
 
 <script>
   const menu = document.getElementById("menu");
-  const menuBtn = document.getElementById("menuBtn");
   const popup = document.getElementById("popup");
 
-  menuBtn.addEventListener("click", function(e) {
-    e.stopPropagation();
+  function toggleMenu() {
     menu.style.left = (menu.style.left === "0px") ? "-260px" : "0px";
-  });
+  }
 
   document.addEventListener("click", function(e) {
-    if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+    if (!menu.contains(e.target) && !e.target.classList.contains("menu-btn")) {
       menu.style.left = "-260px";
     }
   });
