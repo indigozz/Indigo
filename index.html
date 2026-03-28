@@ -8,96 +8,127 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #ffffff;
-  color: #111;
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: #e0ccff;
 }
 
 /* HEADER */
 header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #222;
 }
 
-/* IZQUIERDA */
-.logo {
+/* IZQUIERDA (menu) */
+.menu {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* CENTRO */
+.center {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
-.logo img {
-  width: 32px;
-  height: 32px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.logo h1 {
+.center h1 {
   margin: 0;
   font-size: 18px;
   letter-spacing: 3px;
-  font-weight: 500;
 }
 
-/* DERECHA */
+/* FLOR */
+.center img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* DERECHA (lupa) */
+.search {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* BUSCADOR */
+.search-box {
+  display: none;
+  padding: 10px;
+}
+
 .search-box input {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
+  width: 100%;
+  padding: 8px;
+  border: none;
   outline: none;
-  font-size: 14px;
 }
 
-/* GRID PRODUCTOS */
+/* RESULTADO BUSQUEDA */
+.resultado {
+  display: none;
+  padding: 15px;
+  text-align: center;
+}
+
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  padding: 20px;
+  gap: 10px;
+  padding: 10px;
 }
 
 .producto {
   text-align: center;
-}
-
-.imagen {
-  background: #e5e5e5;
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 40px;
-  color: #999;
-}
-
-.titulo {
-  margin: 10px 0 5px;
-  font-size: 14px;
-}
-
-.boton {
-  font-size: 12px;
-  border: none;
-  background: none;
   cursor: pointer;
 }
 
-/* PREGUNTAS */
-.preguntas {
+.imagen {
+  background: #2a2a2a;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: #666;
+}
+
+.titulo {
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #121212;
   padding: 20px;
-  border-top: 1px solid #eee;
 }
 
-.preguntas h3 {
-  margin-bottom: 10px;
+.modal h2 {
+  margin-top: 20px;
 }
 
-.preguntas p {
-  font-size: 14px;
-  margin: 5px 0;
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* MORADO SUAVE */
+h1, h2 {
+  color: #c084fc;
 }
 
 /* RESPONSIVE */
@@ -112,52 +143,71 @@ header {
 <body>
 
 <header>
-  <div class="logo">
-    <!-- PON TU FLOR AQUÍ -->
-    <img src="https://i.imgur.com/1X6wG6F.png">
+  <!-- IZQUIERDA -->
+  <div class="menu">☰</div>
+
+  <!-- CENTRO -->
+  <div class="center">
     <h1>INDIGO</h1>
+    <img src="https://i.imgur.com/lrtzPh7.jpeg">
   </div>
 
-  <div class="search-box">
-    <input type="text" placeholder="Buscar">
-  </div>
+  <!-- DERECHA -->
+  <div class="search" onclick="abrirBusqueda()">🔍</div>
 </header>
+
+<div class="search-box" id="searchBox">
+  <input type="text" oninput="buscar()" placeholder="Buscar...">
+</div>
+
+<div class="resultado" id="resultado">
+  PRÓXIMAMENTE
+</div>
 
 <section class="grid">
 
-  <!-- PRODUCTOS -->
-  <div class="producto">
-    <div class="imagen">?</div>
-    <div class="titulo">PRONTO</div>
-    <button class="boton">AÑADIR AL CARRO</button>
-  </div>
-
-  <div class="producto">
-    <div class="imagen">?</div>
-    <div class="titulo">PRONTO</div>
-    <button class="boton">AÑADIR AL CARRO</button>
-  </div>
-
-  <div class="producto">
-    <div class="imagen">?</div>
-    <div class="titulo">PRONTO</div>
-    <button class="boton">AÑADIR AL CARRO</button>
-  </div>
-
-  <div class="producto">
-    <div class="imagen">?</div>
-    <div class="titulo">PRONTO</div>
-    <button class="boton">AÑADIR AL CARRO</button>
-  </div>
+<script>
+for(let i=0;i<11;i++){
+document.write(`
+<div class="producto" onclick="abrirProducto()">
+  <div class="imagen">?</div>
+  <div class="titulo">PRONTO</div>
+</div>
+`);
+}
+</script>
 
 </section>
 
-<section class="preguntas">
-  <h3>PREGUNTAS</h3>
-  <p>¿Cómo comprar? Próximamente disponible.</p>
-  <p>¿Métodos de pago? Se informará pronto.</p>
-  <p>¿Envíos? Información próximamente.</p>
-</section>
+<!-- MODAL PRODUCTO -->
+<div class="modal" id="modal">
+  <div class="cerrar" onclick="cerrar()">✕</div>
+
+  <h2>MUY PRONTO</h2>
+  <p>Descripción: MUY PRONTO</p>
+  <p>Talla: ?</p>
+  <p>Color: ?</p>
+  <p>Precio: ?</p>
+  <p>♡</p>
+</div>
+
+<script>
+function abrirBusqueda(){
+  document.getElementById("searchBox").style.display="block";
+}
+
+function buscar(){
+  document.getElementById("resultado").style.display="block";
+}
+
+function abrirProducto(){
+  document.getElementById("modal").style.display="block";
+}
+
+function cerrar(){
+  document.getElementById("modal").style.display="none";
+}
+</script>
 
 </body>
 </html>
