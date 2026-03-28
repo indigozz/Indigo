@@ -1,79 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INDIGO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDIGO</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #1E1E1E;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-    /* HEADER */
-    header {
-      background: #5A4BFF;
-      padding: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+}
 
-    header h1 {
-      color: white;
-      letter-spacing: 5px;
-      margin: 0;
-      font-size: 22px;
-    }
+/* HEADER */
+header {
+  background: #2A0A3D; /* morado oscuro tipo 💜 */
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-    /* SECCIÓN PRINCIPAL */
-    .main {
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+/* FLOR */
+header img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
-    .main h2 {
-      color: #FF3B3B;
-      font-size: 28px;
-      letter-spacing: 6px;
-      margin-bottom: 10px;
-    }
+/* TEXTO INDIGO */
+header h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 4px;
 
-    .linea {
-      width: 120px;
-      height: 2px;
-      background: #FF3B3B;
-    }
-  </style>
+  /* efecto neón */
+  text-shadow:
+    0 0 5px #a855f7,
+    0 0 10px #a855f7,
+    0 0 20px #9333ea;
+}
+
+/* MAIN */
+.main {
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* PRÓXIMAMENTE */
+.main h2 {
+  font-size: 28px;
+  letter-spacing: 6px;
+  color: #c084fc;
+
+  text-shadow:
+    0 0 5px #c084fc,
+    0 0 15px #a855f7,
+    0 0 30px #9333ea;
+}
+
+/* LINEA */
+.linea {
+  width: 120px;
+  height: 2px;
+  margin-top: 10px;
+  background: #a855f7;
+
+  box-shadow: 0 0 10px #a855f7;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 18px;
+  }
+
+  .main h2 {
+    font-size: 22px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
+<header>
+  <!-- CAMBIA ESTA URL POR TU FLOR -->
+  <img src="https://i.imgur.com/1X6wG6F.png" alt="flor">
 
-    <!-- Flor moderna (line art, sin relleno) -->
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 2C13.5 5 13.5 9 12 12C10.5 9 10.5 5 12 2Z"/>
-      <path d="M12 12C15 10.5 19 10.5 22 12C19 13.5 15 13.5 12 12Z"/>
-      <path d="M12 12C13.5 15 13.5 19 12 22C10.5 19 10.5 15 12 12Z"/>
-      <path d="M12 12C9 13.5 5 13.5 2 12C5 10.5 9 10.5 12 12Z"/>
-    </svg>
+  <h1>INDIGO</h1>
+</header>
 
-    <h1>INDIGO</h1>
-  </header>
-
-  <!-- CONTENIDO -->
-  <section class="main">
-    <h2>PRÓXIMAMENTE</h2>
-    <div class="linea"></div>
-  </section>
+<section class="main">
+  <h2>PRÓXIMAMENTE</h2>
+  <div class="linea"></div>
+</section>
 
 </body>
 </html>
