@@ -8,9 +8,27 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
   background: #0A0A0A;
-  color: #FFFFFF;
+  color: white;
+}
+
+/* INTRO */
+.intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0A0A0A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.intro img {
+  width: 120px;
 }
 
 /* HEADER */
@@ -19,7 +37,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border-bottom: 1px solid #222;
+  background: #111; /* mismo tono del logo */
 }
 
 /* MENU */
@@ -28,23 +46,14 @@ header {
   cursor: pointer;
 }
 
-/* CENTRO */
-.center {
+/* LOGO CENTRO */
+.logo {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  justify-content: center;
 }
 
-.center h1 {
-  margin: 0;
-  letter-spacing: 3px;
-  font-weight: 500;
-}
-
-.center img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
+.logo img {
+  width: 35px;
 }
 
 /* BUSCAR */
@@ -53,67 +62,12 @@ header {
   cursor: pointer;
 }
 
-/* MENU LATERAL */
-.menu-lateral {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 220px;
-  height: 100%;
-  background: #111;
-  padding: 20px;
-  transition: 0.3s;
-  z-index: 10;
-}
-
-.menu-lateral p {
-  margin: 18px 0;
-  cursor: pointer;
-  color: #ddd;
-}
-
-.menu-lateral .cerrar {
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* OVERLAY */
-.overlay {
-  display: none;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-}
-
-/* BUSCADOR */
-.search-box {
-  display: none;
-  padding: 10px;
-}
-
-.search-box input {
-  width: 100%;
-  padding: 10px;
-  background: #111;
-  border: 1px solid #333;
-  color: white;
-}
-
-/* RESULTADO */
-.resultado {
-  display: none;
-  text-align: center;
-  padding: 10px;
-  color: #ccc;
-}
-
 /* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  padding: 12px;
+  gap: 10px;
+  padding: 10px;
 }
 
 .producto {
@@ -124,8 +78,8 @@ header {
   background: #1C1C1C;
   height: 140px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   color: #555;
   font-size: 30px;
 }
@@ -134,29 +88,6 @@ header {
   font-size: 13px;
   margin-top: 6px;
   color: #ccc;
-}
-
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0A0A0A;
-  padding: 20px;
-}
-
-.modal h2 {
-  margin-top: 20px;
-}
-
-.cerrar-modal {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  cursor: pointer;
 }
 
 /* RESPONSIVE */
@@ -170,41 +101,28 @@ header {
 
 <body>
 
-<header>
-  <div class="menu" onclick="abrirMenu()">☰</div>
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <img src="https://i.imgur.com/Zqh7Mhp.jpeg">
+</div>
 
-  <div class="center">
-    <h1>INDIGO</h1>
+<!-- HEADER -->
+<header>
+  <div class="menu">☰</div>
+
+  <div class="logo">
     <img src="https://i.imgur.com/Zqh7Mhp.jpeg">
   </div>
 
-  <div class="search" onclick="abrirBusqueda()">🔍</div>
+  <div class="search">🔍</div>
 </header>
-
-<!-- MENU -->
-<div class="menu-lateral" id="menu">
-  <div class="cerrar" onclick="cerrarMenu()">✕</div>
-  <p onclick="mostrarProx()">AYUDA</p>
-  <p onclick="mostrarProx()">SOPORTE</p>
-  <p onclick="mostrarProx()">PREGUNTAS</p>
-  <p onclick="mostrarProx()">CONTACTO</p>
-</div>
-
-<div class="overlay" id="overlay" onclick="cerrarMenu()"></div>
-
-<!-- BUSCADOR -->
-<div class="search-box" id="searchBox">
-  <input type="text" oninput="buscar()" placeholder="Buscar...">
-</div>
-
-<div class="resultado" id="resultado">PRÓXIMAMENTE</div>
 
 <!-- PRODUCTOS -->
 <section class="grid">
 <script>
 for(let i=0;i<11;i++){
 document.write(`
-<div class="producto" onclick="abrirProducto()">
+<div class="producto">
   <div class="imagen">?</div>
   <div class="titulo">PRONTO</div>
 </div>
@@ -213,47 +131,10 @@ document.write(`
 </script>
 </section>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="cerrar-modal" onclick="cerrarProducto()">✕</div>
-  <h2>MUY PRONTO</h2>
-  <p>Descripción: MUY PRONTO</p>
-  <p>Talla: ?</p>
-  <p>Color: ?</p>
-  <p>Precio: ?</p>
-  <p>♡</p>
-</div>
-
 <script>
-function abrirMenu(){
-  document.getElementById("menu").style.left="0";
-  document.getElementById("overlay").style.display="block";
-}
-
-function cerrarMenu(){
-  document.getElementById("menu").style.left="-250px";
-  document.getElementById("overlay").style.display="none";
-}
-
-function mostrarProx(){
-  alert("PRÓXIMAMENTE");
-}
-
-function abrirBusqueda(){
-  document.getElementById("searchBox").style.display="block";
-}
-
-function buscar(){
-  document.getElementById("resultado").style.display="block";
-}
-
-function abrirProducto(){
-  document.getElementById("modal").style.display="block";
-}
-
-function cerrarProducto(){
-  document.getElementById("modal").style.display="none";
-}
+setTimeout(()=>{
+  document.getElementById("intro").style.display="none";
+},2000);
 </script>
 
 </body>
