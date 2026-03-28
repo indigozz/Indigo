@@ -8,9 +8,9 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #121212;
-  color: #e0ccff;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0A0A0A;
+  color: #FFFFFF;
 }
 
 /* HEADER */
@@ -19,9 +19,10 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
+  border-bottom: 1px solid #222;
 }
 
-/* MENU ICON */
+/* MENU */
 .menu {
   font-size: 22px;
   cursor: pointer;
@@ -37,14 +38,16 @@ header {
 .center h1 {
   margin: 0;
   letter-spacing: 3px;
-  color: #c084fc;
+  font-weight: 500;
 }
 
 .center img {
-  width: 26px;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
-/* LUPA */
+/* BUSCAR */
 .search {
   font-size: 18px;
   cursor: pointer;
@@ -55,17 +58,18 @@ header {
   position: fixed;
   top: 0;
   left: -250px;
-  width: 200px;
+  width: 220px;
   height: 100%;
-  background: #1a1a1a;
+  background: #111;
   padding: 20px;
   transition: 0.3s;
   z-index: 10;
 }
 
 .menu-lateral p {
-  margin: 15px 0;
+  margin: 18px 0;
   cursor: pointer;
+  color: #ddd;
 }
 
 .menu-lateral .cerrar {
@@ -80,36 +84,56 @@ header {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.5);
-  top: 0;
-  left: 0;
+}
+
+/* BUSCADOR */
+.search-box {
+  display: none;
+  padding: 10px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px;
+  background: #111;
+  border: 1px solid #333;
+  color: white;
+}
+
+/* RESULTADO */
+.resultado {
+  display: none;
+  text-align: center;
+  padding: 10px;
+  color: #ccc;
 }
 
 /* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  padding: 10px;
+  gap: 12px;
+  padding: 12px;
 }
 
 .producto {
-  text-align: center;
   cursor: pointer;
 }
 
 .imagen {
+  background: #1C1C1C;
   height: 140px;
-  background: #2a2a2a;
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: #666;
+  justify-content: center;
+  color: #555;
   font-size: 30px;
 }
 
 .titulo {
   font-size: 13px;
-  margin: 6px 0;
+  margin-top: 6px;
+  color: #ccc;
 }
 
 /* MODAL */
@@ -120,8 +144,12 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #121212;
+  background: #0A0A0A;
   padding: 20px;
+}
+
+.modal h2 {
+  margin-top: 20px;
 }
 
 .cerrar-modal {
@@ -129,18 +157,6 @@ header {
   top: 10px;
   right: 20px;
   cursor: pointer;
-}
-
-/* BUSCADOR */
-.search-box {
-  display: none;
-  padding: 10px;
-}
-
-.resultado {
-  display: none;
-  text-align: center;
-  padding: 10px;
 }
 
 /* RESPONSIVE */
@@ -159,7 +175,7 @@ header {
 
   <div class="center">
     <h1>INDIGO</h1>
-    <img src="https://i.imgur.com/lrtzPh7.jpeg">
+    <img src="https://i.imgur.com/Zqh7Mhp.jpeg">
   </div>
 
   <div class="search" onclick="abrirBusqueda()">🔍</div>
