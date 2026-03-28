@@ -13,50 +13,28 @@ body {
   color: white;
 }
 
-/* INTRO */
-.intro {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0A0A0A;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.intro img {
-  width: 120px;
-}
-
 /* HEADER */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background: #111; /* mismo tono del logo */
+  border-bottom: 1px solid #222;
 }
 
-/* MENU */
+/* IZQUIERDA */
 .menu {
   font-size: 22px;
   cursor: pointer;
 }
 
-/* LOGO CENTRO */
+/* CENTRO (LOGO TEXTO) */
 .logo {
-  display: flex;
-  justify-content: center;
+  font-size: 18px;
+  letter-spacing: 4px;
 }
 
-.logo img {
-  width: 35px;
-}
-
-/* BUSCAR */
+/* DERECHA */
 .search {
   font-size: 18px;
   cursor: pointer;
@@ -101,23 +79,14 @@ header {
 
 <body>
 
-<!-- INTRO -->
-<div class="intro" id="intro">
-  <img src="https://i.imgur.com/Zqh7Mhp.jpeg">
-</div>
-
-<!-- HEADER -->
 <header>
   <div class="menu">☰</div>
 
-  <div class="logo">
-    <img src="https://i.imgur.com/Zqh7Mhp.jpeg">
-  </div>
+  <div class="logo">INDIGO</div>
 
   <div class="search">🔍</div>
 </header>
 
-<!-- PRODUCTOS -->
 <section class="grid">
 <script>
 for(let i=0;i<11;i++){
@@ -130,12 +99,6 @@ document.write(`
 }
 </script>
 </section>
-
-<script>
-setTimeout(()=>{
-  document.getElementById("intro").style.display="none";
-},2000);
-</script>
 
 </body>
 </html>
