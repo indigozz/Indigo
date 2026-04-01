@@ -32,27 +32,6 @@ header {
   letter-spacing: 4px;
 }
 
-/* BUSCADOR */
-.search-box {
-  display: none;
-  padding: 10px;
-}
-
-.search-box input {
-  width: 100%;
-  padding: 8px;
-  background: #111;
-  border: 1px solid #333;
-  color: white;
-}
-
-.resultado {
-  display: none;
-  text-align: center;
-  padding: 10px;
-  color: #ccc;
-}
-
 /* GRID */
 .grid {
   display: grid;
@@ -90,11 +69,31 @@ header {
   width: 100%;
   height: 100%;
   background: #0A0A0A;
-  padding: 20px;
+  z-index: 100;
+  overflow-y: auto;
 }
 
-.modal h2 {
-  margin-top: 20px;
+.modal-img {
+  width: 100%;
+  height: 300px;
+  background: #1C1C1C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: #555;
+}
+
+.modal-info {
+  padding: 15px;
+}
+
+.modal-info h2 {
+  margin: 10px 0;
+}
+
+.modal-info p {
+  color: #ccc;
 }
 
 .cerrar {
@@ -102,13 +101,27 @@ header {
   top: 10px;
   right: 20px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 /* RESPONSIVE */
 @media(min-width:768px){
   .grid{
     grid-template-columns: repeat(4,1fr);
+  }
+
+  .modal {
+    display: flex;
+  }
+
+  .modal-img {
+    width: 50%;
+    height: 100%;
+  }
+
+  .modal-info {
+    width: 50%;
+    padding: 30px;
   }
 }
 </style>
@@ -119,17 +132,9 @@ header {
 <header>
   <div class="menu" onclick="menuClick()">☰</div>
   <div class="logo">INDIGO</div>
-  <div class="search" onclick="abrirBusqueda()">🔍</div>
+  <div class="search" onclick="buscar()">🔍</div>
 </header>
 
-<!-- BUSCADOR -->
-<div class="search-box" id="searchBox">
-  <input type="text" oninput="buscar()" placeholder="Buscar...">
-</div>
-
-<div class="resultado" id="resultado">PRÓXIMAMENTE</div>
-
-<!-- PRODUCTOS -->
 <section class="grid">
 <script>
 for(let i=0;i<11;i++){
@@ -147,11 +152,12 @@ document.write(`
 <div class="modal" id="modal">
   <div class="cerrar" onclick="cerrarProducto()">✕</div>
 
-  <h2>PRÓXIMAMENTE</h2>
-  <p><strong>Descripción:</strong> PRÓXIMAMENTE</p>
-  <p><strong>Talla:</strong> PRÓXIMAMENTE</p>
-  <p><strong>Color:</strong> PRÓXIMAMENTE</p>
-  <p><strong>Precio:</strong> PRÓXIMAMENTE</p>
+  <div class="modal-img">?</div>
+
+  <div class="modal-info">
+    <h2>PRÓXIMAMENTE</h2>
+    <p>PRÓXIMAMENTE</p>
+  </div>
 </div>
 
 <script>
@@ -159,12 +165,8 @@ function menuClick(){
   alert("PRONTO");
 }
 
-function abrirBusqueda(){
-  document.getElementById("searchBox").style.display="block";
-}
-
 function buscar(){
-  document.getElementById("resultado").style.display="block";
+  alert("PRÓXIMAMENTE");
 }
 
 function abrirProducto(){
