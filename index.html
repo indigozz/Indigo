@@ -22,22 +22,35 @@ header {
   border-bottom: 1px solid #222;
 }
 
-/* IZQUIERDA */
-.menu {
+.menu, .search {
   font-size: 22px;
   cursor: pointer;
 }
 
-/* CENTRO (LOGO TEXTO) */
 .logo {
   font-size: 18px;
   letter-spacing: 4px;
 }
 
-/* DERECHA */
-.search {
-  font-size: 18px;
-  cursor: pointer;
+/* BUSCADOR */
+.search-box {
+  display: none;
+  padding: 10px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px;
+  background: #111;
+  border: 1px solid #333;
+  color: white;
+}
+
+.resultado {
+  display: none;
+  text-align: center;
+  padding: 10px;
+  color: #ccc;
 }
 
 /* GRID */
@@ -68,6 +81,30 @@ header {
   color: #ccc;
 }
 
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0A0A0A;
+  padding: 20px;
+}
+
+.modal h2 {
+  margin-top: 20px;
+}
+
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
 /* RESPONSIVE */
 @media(min-width:768px){
   .grid{
@@ -80,18 +117,24 @@ header {
 <body>
 
 <header>
-  <div class="menu">☰</div>
-
+  <div class="menu" onclick="menuClick()">☰</div>
   <div class="logo">INDIGO</div>
-
-  <div class="search">🔍</div>
+  <div class="search" onclick="abrirBusqueda()">🔍</div>
 </header>
 
+<!-- BUSCADOR -->
+<div class="search-box" id="searchBox">
+  <input type="text" oninput="buscar()" placeholder="Buscar...">
+</div>
+
+<div class="resultado" id="resultado">PRÓXIMAMENTE</div>
+
+<!-- PRODUCTOS -->
 <section class="grid">
 <script>
 for(let i=0;i<11;i++){
 document.write(`
-<div class="producto">
+<div class="producto" onclick="abrirProducto()">
   <div class="imagen">?</div>
   <div class="titulo">PRONTO</div>
 </div>
@@ -99,6 +142,39 @@ document.write(`
 }
 </script>
 </section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="cerrar" onclick="cerrarProducto()">✕</div>
+
+  <h2>PRÓXIMAMENTE</h2>
+  <p><strong>Descripción:</strong> PRÓXIMAMENTE</p>
+  <p><strong>Talla:</strong> PRÓXIMAMENTE</p>
+  <p><strong>Color:</strong> PRÓXIMAMENTE</p>
+  <p><strong>Precio:</strong> PRÓXIMAMENTE</p>
+</div>
+
+<script>
+function menuClick(){
+  alert("PRONTO");
+}
+
+function abrirBusqueda(){
+  document.getElementById("searchBox").style.display="block";
+}
+
+function buscar(){
+  document.getElementById("resultado").style.display="block";
+}
+
+function abrirProducto(){
+  document.getElementById("modal").style.display="block";
+}
+
+function cerrarProducto(){
+  document.getElementById("modal").style.display="none";
+}
+</script>
 
 </body>
 </html>
