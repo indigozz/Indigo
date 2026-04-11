@@ -9,8 +9,8 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #0A0A0A;
   color: white;
+  background: linear-gradient(180deg, #0a0a0a 0%, #111 40%, #0a0a0a 100%);
 }
 
 /* HEADER */
@@ -19,7 +19,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border-bottom: 1px solid #222;
 }
 
 .menu, .search {
@@ -30,6 +29,34 @@ header {
 .logo {
   font-size: 18px;
   letter-spacing: 4px;
+}
+
+/* HERO */
+.hero {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero-content h1 {
+  font-size: 28px;
+  letter-spacing: 3px;
+}
+
+.hero-content p {
+  margin-top: 10px;
+  color: #aaa;
+}
+
+.hero-btn {
+  margin-top: 20px;
+  border: 1px solid white;
+  padding: 10px 20px;
+  display: inline-block;
+  font-size: 12px;
 }
 
 /* GRID */
@@ -88,14 +115,6 @@ header {
   padding: 15px;
 }
 
-.modal-info h2 {
-  margin: 10px 0;
-}
-
-.modal-info p {
-  color: #ccc;
-}
-
 .cerrar {
   position: absolute;
   top: 10px;
@@ -110,6 +129,14 @@ header {
     grid-template-columns: repeat(4,1fr);
   }
 
+  .hero {
+    height: 70vh;
+  }
+
+  .hero-content h1 {
+    font-size: 40px;
+  }
+
   .modal {
     display: flex;
   }
@@ -121,7 +148,7 @@ header {
 
   .modal-info {
     width: 50%;
-    padding: 30px;
+    padding: 40px;
   }
 }
 </style>
@@ -135,6 +162,16 @@ header {
   <div class="search" onclick="buscar()">🔍</div>
 </header>
 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>COLECCIÓN INDIGO</h1>
+    <p>PRÓXIMAMENTE</p>
+    <div class="hero-btn">VER MÁS</div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
 <section class="grid">
 <script>
 for(let i=0;i<11;i++){
